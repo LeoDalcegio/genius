@@ -1,0 +1,22 @@
+{
+  "name": "olist-megahack2.0",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/LeoDalcegio/olist-megahack2.0",
+  "author": "Leonardo Luís Dalcegio",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "celebrate": "^12.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
+    "segments": "^1.0.1",
+    "synonyms": "^1.0.1"
+  }
+}
