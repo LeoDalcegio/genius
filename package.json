@@ -6,17 +6,19 @@
   "author": "Leonardo Luís Dalcegio",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "dependencies": {
     "celebrate": "^12.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi": "^14.3.1",
-    "morgan": "^1.10.0",
+    "keyword-extractor": "0.0.18",
+    "mongoose": "^5.9.11",
+    "mongoose-paginate": "^5.0.3",
     "nodemon": "^2.0.3",
-    "segments": "^1.0.1",
-    "synonyms": "^1.0.1"
+    "segments": "^1.0.1"
   }
 }
