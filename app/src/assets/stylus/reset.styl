@@ -1,0 +1,99 @@
+*, :after, :before {
+    box-sizing: inherit;
+    outline: none;
+}
+html {
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-weight: inherit;
+    vertical-align: baseline;
+}
+a {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+button, input, select, textarea {
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #f2f2f2;
+    background-color: #fff;
+}
+
+input[type=radio] {
+    vertical-align: text-bottom;
+}
+input[type=checkbox] {
+    vertical-align: bottom;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset;
+}
+textarea {
+    resize: none;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+ol, ul {
+    list-style: none;
+}
+img {
+    object-fit: contain;
+    max-width: 100%
+}
+b, strong {
+    font-weight: 700;
+}
+
+/* FONTE BASE DO SITE */
+*{
+	font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* CLASSE PARA USAR TRANSITION NOS ELEMENTOS */
+.tra{
+	-webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+/* CONTAINER DO SITE */
+
+.container {
+	width: 1228px;
+    display: flex;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0px 5px;
+}
+
+.container.row{
+	flex-direction: row;
+}
+
+.container.col{
+	flex-direction: column;
+}
+
+.container-padrao{
+    width: 1178px;
+    display: flex;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0px 18px;
+}
+
+h1{
+    font-size: 40px;
+}
