@@ -15,15 +15,15 @@ const QuestionSchema = new mongoose.Schema({
         answers: {
             positive: {
                 type: String,
-                required: true,
+                required: false,
             },
             negative: {
                 type: String,
-                required: true,
+                required: false,
             },
             informative: {
                 type: String,
-                required: true,
+                required: false,
             }
         },
         standardAnswer: {

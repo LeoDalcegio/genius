@@ -1,6 +1,7 @@
 "use strict"
 
 const Question = require('../models/Question.js');
+const NotAnsweredQuestion = require('../models/NotAnsweredQuestions.js');
 const keywordExtractor = require('keyword-extractor');
 
 module.exports = {
@@ -8,14 +9,24 @@ module.exports = {
         const { product, questions } = request.body;
 
         try{            
-            const isDuplicated = await Question.findOne({ product });    
-            
-            if(isDuplicated)
-                return response.status(409).send({ error: "Duplicated entry" });
+            Question.findOneAndUpdate({ 
+                product: product 
+            }, { 
+                $set: { 
+                    product: product, 
+                    questions: questions
+                }
+            }, { 
+                upsert: true, 
+                new: true 
+            }, (err, data) => {
+                if (err) {
+                    return response.status(400).send({ error: "Error on creating question: " + err });
+                }
 
-            const question = await Question.create({ product, questions });
+                return response.json(data);
+            });
 
-            return response.json(question);
         }catch(err){
             return response.status(400).send(err.message);
         }
@@ -28,19 +39,31 @@ module.exports = {
             remove_digits: true,
             return_changed_case:true,
             remove_duplicates: false
-       });
+        });
 
-       const matches = [];
+        const matches = [];
 
-       const productQuestions = await Question.findOne({ product });
+        const productQuestions = await Question.findOne({ product });
 
-       productQuestions.questions.forEach((item) => {
-            if(extractionResult.some(r => item.keywords.indexOf(r) >= 0)){
-                matches.push(item.answers[item.standardAnswer]);
-            }
-       })
+        if(productQuestions){
+            productQuestions.questions.forEach((item) => {
+                if(extractionResult.some(r => item.keywords.indexOf(r) >= 0)){
+                    matches.push(item.answers[item.standardAnswer]);
+                }
+            });
+        }
 
-       return response.json(matches);
+        if(!matches.length){
+            await NotAnsweredQuestion.create({
+                product,
+                question: question,
+                questionKeyWords: extractionResult
+            });
+
+            return response.status(200).send({ message: "This product does not have any questions/anwsers to it, but we added this question to the NotAnsweredQuestion document." });
+        };
+
+        return response.json(matches);
     },
     async index(request, response){
         const { page = 1, limit = 10 } = request.query;
@@ -68,7 +91,6 @@ module.exports = {
             return response.status(400).send(err.message)
         }
     },
-
     async update(request, response){
         try{
             const question = await Question.findByIdAndUpdate(request.params.id, request.body, { new: true });
