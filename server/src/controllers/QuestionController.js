@@ -2,13 +2,21 @@
 
 const Question = require('../models/Question.js');
 const NotAnsweredQuestion = require('../models/NotAnsweredQuestions.js');
-const keywordExtractor = require('keyword-extractor');
+const extractKeywords = require('../utils/extractKeywords');
+const removeAccents = require('../utils/removeAccents');
 
 module.exports = {
     async create(request, response){
         const { product, questions } = request.body;
 
         try{            
+            // search for keywords if not given any of them
+            questions.forEach((part, index, theArray) => {
+                if(!theArray[index].keywords.length){
+                    theArray[index].keywords = extractKeywords(theArray[index].question);
+                }
+            });
+
             Question.findOneAndUpdate({ 
                 product: product 
             }, { 
@@ -34,11 +42,10 @@ module.exports = {
     async ask(request, response){
         const { product, question } = request.body;
 
-        const extractionResult = keywordExtractor.extract(question, {
-            language:"portuguese",
-            remove_digits: true,
-            return_changed_case:true,
-            remove_duplicates: false
+        const extractionResult = extractKeywords(question);
+
+        extractionResult.forEach((part, index, theArray) => {
+            theArray[index] = removeAccents(theArray[index]);
         });
 
         const matches = [];
@@ -46,12 +53,12 @@ module.exports = {
         const productQuestions = await Question.findOne({ product });
 
         if(productQuestions){
-            productQuestions.questions.forEach((item) => {
-                if(extractionResult.some(r => item.keywords.indexOf(r) >= 0)){
+            productQuestions.questions.forEach((item) => {        
+                if(item.keywords.some(keyword => extractionResult.indexOf(removeAccents(keyword)) >= 0)){
                     matches.push(item.answers[item.standardAnswer]);
                 }
             });
-        }
+        };
 
         if(!matches.length){
             await NotAnsweredQuestion.create({
@@ -63,7 +70,7 @@ module.exports = {
             return response.status(200).send({ message: "This product does not have any questions/anwsers to it, but we added this question to the NotAnsweredQuestion document." });
         };
 
-        return response.json(matches);
+        return response.send({ answer: matches[0] });
     },
     async index(request, response){
         const { page = 1, limit = 10 } = request.query;
