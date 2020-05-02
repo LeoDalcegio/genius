@@ -67,10 +67,15 @@ module.exports = {
     },
     async index(request, response){
         const { page = 1, limit = 10 } = request.query;
-        
+
+        let query = {};
+
+        if(request.query.product){
+            query.product = request.query.product;
+        }
+
         try{
-            const questions = await Question.paginate({ 
-             }, { 
+            const questions = await Question.paginate(query, { 
                 page, 
                 limit
             });

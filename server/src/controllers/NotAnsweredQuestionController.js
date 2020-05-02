@@ -5,10 +5,15 @@ const NotAnsweredQuestion = require('../models/NotAnsweredQuestions.js');
 module.exports = {
     async index(request, response){
         const { page = 1, limit = 10 } = request.query;
+
+        let query = {};
+
+        if(request.query.product){
+            query.product = request.query.product;
+        }
         
         try{
-            const notAnsweredQuestion = await NotAnsweredQuestion.paginate({ 
-             }, { 
+            const notAnsweredQuestion = await NotAnsweredQuestion.paginate(query, { 
                 page, 
                 limit
             });
