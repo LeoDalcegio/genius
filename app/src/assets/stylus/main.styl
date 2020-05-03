@@ -171,6 +171,7 @@ label {
     }
 }
 
+select,
 input {
     max-width: 100%;
     height: 50px;
@@ -191,6 +192,15 @@ input {
     &:focus {
         border-color: $roxo;
     }
+}
+
+select {
+    cursor: pointer;
+	-webkit-appearance: none;
+	background-image: url(../images/down-arrow.svg);
+	background-repeat: no-repeat;
+	background-position: 98%;
+    background-size: 18px;
 }
 
 button {
@@ -260,6 +270,12 @@ button {
     margin-top: 18px;
 }
 
+.mb-39 {
+    margin-bottom: 39px;
+}
+.mb-24 {
+    margin-bottom: 24px;
+}
 .mb-18 {
     margin-bottom: 18px;
 }

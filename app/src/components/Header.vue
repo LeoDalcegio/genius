@@ -8,8 +8,8 @@
       <router-link to="/criar" active-class="ativo" exact>
         Criar
       </router-link>
-      <router-link to="/perguntas" active-class="ativo" exact>
-        Perguntas
+      <router-link to="/perguntar" active-class="ativo" exact>
+        Perguntar
       </router-link>
     </div>
   </header>

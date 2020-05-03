@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Listar from '../views/Listar.vue';
 import CriarEditar from '../views/CriarEditar.vue';
+import Perguntar from '../views/Perguntar.vue';
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const routes = [
 		path: '/editar/:id',
 		name: 'Editar',
 		component: CriarEditar,
+	},
+	{
+		path: '/perguntar',
+		name: 'Perguntar',
+		component: Perguntar,
 	},
 ];
 
