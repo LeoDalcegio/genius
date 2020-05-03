@@ -2,15 +2,13 @@
   <Container>
 
     <div class="head-actions flexed space-between">
-      <Title text="AUTOMAÇÕES" />
-      <input type="text" v-model="pesquisa" placeholder="Pesquisar">
+      <Title text="Criar nova automação" />
       <div class="flexed">
-        <button class="white mr-25">
-          <font-awesome-icon icon="filter" />
-          Filtros
+        <button class="white mr-25" @click="redirectToListar()">
+          Voltar
         </button>
-        <button class="yellow" @click="redirectToCriar()">
-          Nova automação
+        <button class="yellow">
+          Criar
         </button>
       </div>
     </div>
@@ -54,45 +52,14 @@ export default {
 	},
 	data() {
 		return {
-			products: [],
+			productDto: {},
 			apiUrl: process.env.VUE_API_URL,
-			pesquisa: '',
 		};
 	},
 	methods: {
-		fetchProducts() {
-			// this.$http.get(this.apiUrl).then((response) => {
-			//	console.log(response);
-			// });
-			this.products = [
-				{
-					id: 1,
-					name: 'Bicicleta',
-					quantity: 2,
-				},
-				{
-					id: 2,
-					name: 'Capacete',
-					quantity: 15,
-				},
-				{
-					id: 2,
-					name: 'Capacete',
-					quantity: 15,
-				},
-				{
-					id: 2,
-					name: 'Capacete',
-					quantity: 15,
-				},
-			];
+		redirectToListar() {
+			this.$router.push('/');
 		},
-		redirectToCriar() {
-			this.$router.push('criar');
-		},
-	},
-	beforeMount() {
-		this.fetchProducts();
 	},
 };
 </script>

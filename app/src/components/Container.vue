@@ -19,6 +19,8 @@ export default {
     width: 100%;
     max-width: 100%;
     padding: 48px 108px;
+    display: flex;
+    flex-flow: wrap;
   }
 
 </style>

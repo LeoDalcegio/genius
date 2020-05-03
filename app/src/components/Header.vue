@@ -2,13 +2,13 @@
   <header class="flexed space-between align-center">
     <img src="../assets/images/logo-genius.svg" alt="Logo Genius Questions">
     <div class="flexed">
-      <router-link to="/" active-class="ativo">
+      <router-link to="/" active-class="ativo" exact>
         Listar
       </router-link>
-      <router-link to="/criar" active-class="ativo">
+      <router-link to="/criar" active-class="ativo" exact>
         Criar
       </router-link>
-      <router-link to="/perguntas" active-class="ativo">
+      <router-link to="/perguntas" active-class="ativo" exact>
         Perguntas
       </router-link>
     </div>

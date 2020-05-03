@@ -9,6 +9,63 @@ html, body {
 #app {
     font-family: $fonte;
 }
+.head-actions {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    a {
+        &.btn-table {
+            font-size: 21px;
+        }
+        &.btn-edit {
+            color: $amarelo;
+        }
+        &.btn-delete {
+            color: $vermelho;
+        }
+    }
+    thead {
+        border: 2px solid #333652;
+        tr {
+            background: #333652;
+            width: 100%;
+            height: 54px;
+            th {
+                font-family: $fonte;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 21px;
+                color: $brancoFonte;
+                text-align left;
+                vertical-align: middle;
+            }
+        }
+    }
+    tbody {
+        border: 2px solid #333652;
+        tr {
+            width: 100%;
+            height: 54px;
+            &:nth-of-type(even) { 
+                background-color: rgba(218, 218, 218, 0.2);
+            }
+            td {
+                font-family: $fonte;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 21px;
+                color: $roxoTable;
+                vertical-align: middle;
+            }
+        }
+    }
+}
 
 input {
     max-width: 100%;
@@ -72,6 +129,17 @@ button {
 }
 .mr-25 {
     margin-right: 25px;
+}
+.mr-14 {
+    margin-right: 14px;
+}
+
+.mt-38 {
+    margin-top: 38px;
+}
+
+.pl-37 {
+    padding-left: 37px;
 }
 
 .flexed {
