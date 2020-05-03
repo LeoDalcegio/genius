@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-	faFilter, faTrash, faEdit, faCheck,
+	faFilter, faTrash, faEdit, faCheck, faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vue from 'vue';
@@ -11,7 +11,7 @@ import router from './router';
 import './assets/stylus/reset.styl';
 import './assets/stylus/main.styl';
 
-library.add(faFilter, faTrash, faEdit, faCheck);
+library.add(faFilter, faTrash, faEdit, faCheck, faTimes);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

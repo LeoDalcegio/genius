@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import './custom-radio.styl';
 
 @import './variables.styl';
 
@@ -67,6 +68,109 @@ table {
     }
 }
 
+.forms {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 30px;
+    .column {
+        width: 49%;
+    }
+    .suround-question {
+        border: 2px solid #333652;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding: 18px 23px;
+    }
+    .suround-questions {
+        border: 2px solid #333652;
+        box-sizing: border-box;
+        border-radius: 5px;
+        .question {
+            padding: 15px 15px;
+            label {
+                margin-bottom: 0;
+            }
+            a {
+                font-size: 18px;
+                &.btn-edit {
+                    color: $amarelo;
+                }
+                &.btn-delete {
+                    color: $vermelho;
+                }
+            }
+            &:not(:first-child) { 
+                border-top: 1px solid rgba(147, 145, 137, 0.5);
+            }
+        }
+    }
+}
+
+.suround-keywords {
+    min-height: 140px;
+}
+.keywords {
+    height: auto;
+    .keyword {
+        font-family: $fonte;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 15px;
+        color: $roxo;
+        background: $amarelo;
+        width: auto;
+        height: 25px;
+        padding: 5px;
+        border-radius: 5px;
+        a {
+            margin-left: 15px;
+            &.btn-remove-keyword {
+                border: none;
+                background: none;
+                font-size: 13px;
+                color: $roxo;
+            }
+        }
+    }
+}
+
+span {
+    &.validate {
+        font-family: $fonte;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 14px;
+        line-height: 21px;
+        color: $vermelho;
+    }
+}
+
+label {
+    font-family: $fonte;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+    margin-bottom: 10px;
+    small {
+        font-family: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        color: $vermelho;
+    }
+    &.not-big {
+        font-weight: 500;
+    }
+    &.radio {
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
 input {
     max-width: 100%;
     height: 50px;
@@ -127,6 +231,9 @@ button {
 .mr-50 {
     margin-right: 50px;
 }
+.mr-42 {
+    margin-right: 42px;
+}
 .mr-25 {
     margin-right: 25px;
 }
@@ -134,20 +241,53 @@ button {
     margin-right: 14px;
 }
 
+.mt-64 {
+    margin-top: 64px;
+}
 .mt-38 {
     margin-top: 38px;
+}
+.mt-35 {
+    margin-top: 35px;
+}
+.mt-26 {
+    margin-top: 26px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-18 {
+    margin-top: 18px;
+}
+
+.mb-18 {
+    margin-bottom: 18px;
+}
+.mb-14 {
+    margin-bottom: 14px;
 }
 
 .pl-37 {
     padding-left: 37px;
 }
 
+.w100p {
+    width: 100%;
+}
+
 .flexed {
     display: flex;
     flex-flow: wrap;
 }
+.flexed-column {
+    display: flex;
+    flex-flow: wrap column;
+}
 .space-between {
     justify-content: space-between;
+}
+.flex-end {
+    justify-content: flex-end;
 }
 .align-center {
     align-items: center;

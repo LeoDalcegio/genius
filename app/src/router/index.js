@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Listar from '../views/Listar.vue';
-import Criar from '../views/Criar.vue';
+import CriarEditar from '../views/CriarEditar.vue';
 
 Vue.use(VueRouter);
 
@@ -14,7 +14,12 @@ const routes = [
 	{
 		path: '/criar',
 		name: 'Criar',
-		component: Criar,
+		component: CriarEditar,
+	},
+	{
+		path: '/editar/:id',
+		name: 'Editar',
+		component: CriarEditar,
 	},
 ];
 
