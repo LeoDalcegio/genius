@@ -171,6 +171,19 @@ label {
     }
 }
 
+
+p {
+    &.modal-description {
+        font-family: $fonte;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: $roxoTable;
+        text-align: center;
+    }
+}
+
 select,
 input {
     max-width: 100%;
@@ -221,13 +234,19 @@ button {
         background: #F9F9F9;
         border: 2px solid #F9F9F9;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-        color: #333652;
+        color: $roxo;
     }
     &.yellow {
-        background: #FAD02C;
-        border: 2px solid #FAD02C;
+        background: $amarelo;
+        border: 2px solid $amarelo;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-        color: #333652;
+        color: $roxo;
+    }
+    &.purple {
+        background: $roxo;
+        border: 2px solid $roxo;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        color: $brancoFonte;
     }
 }
 
@@ -290,6 +309,9 @@ button {
 .w100p {
     width: 100%;
 }
+.w256px {
+    width: 256px;
+}
 
 .flexed {
     display: flex;
@@ -302,9 +324,15 @@ button {
 .space-between {
     justify-content: space-between;
 }
+.center {
+    justify-content: center;
+}
 .flex-end {
     justify-content: flex-end;
 }
 .align-center {
     align-items: center;
+}
+.text-center {
+    text-align: center;
 }

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Listar from '../views/Listar.vue';
 import CriarEditar from '../views/CriarEditar.vue';
 import Perguntar from '../views/Perguntar.vue';
+import PerguntasNaoRespondidas from '../views/PergutasNaoRespondidas.vue';
 
 Vue.use(VueRouter);
 
@@ -11,6 +12,11 @@ const routes = [
 		path: '/',
 		name: 'Listar',
 		component: Listar,
+	},
+	{
+		path: '/perguntas-nao-respondidas',
+		name: 'PerguntasNaoRespondidas',
+		component: PerguntasNaoRespondidas,
 	},
 	{
 		path: '/criar',

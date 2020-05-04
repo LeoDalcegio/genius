@@ -5,7 +5,7 @@
       <Title text="Faça uma pergunta" />
     </div>
 
-  <div class="flexed-column w100p mb-24">
+  <div class="flexed-column w100p mb-24 mt-26">
     <label>Escolha o produto</label>
     <select v-model="questionDto.product">
       <option value="" selected disabled>Selecione o produto</option>
@@ -25,6 +25,13 @@
     </button>
   </div>
 
+  <div class="w100p flexed-column mt-64">
+    <label>Resposta</label>
+    <div class="answer">
+      {{ answer }}
+    </div>
+  </div>
+
   </Container>
 </template>
 
@@ -40,10 +47,22 @@ export default {
 	},
 	data() {
 		return {
-			apiUrl: process.env.VUE_API_URL,
+			apiUrl: process.env.VUE_APP_API_URL,
 			questionDto: {},
 			products: [],
+			answer: '',
 		};
+	},
+	watch: {
+		questionDto: {
+			handler(value) {
+				if (value.question === '') {
+					this.answer = '';
+				}
+			},
+			deep: true,
+
+		},
 	},
 	methods: {
 		findAllProducts() {
@@ -53,7 +72,11 @@ export default {
 		},
 		sendQuestion() {
 			this.$http.post(`${this.apiUrl}/questions/ask`, this.questionDto).then((response) => {
-				console.log(response);
+				if (response.data.message) {
+					this.answer = 'Nenhuma resposta encontrada, colocamos ela nas Perguntas não respondidas.';
+					return;
+				}
+				this.answer = response.data.answer;
 			});
 		},
 	},
@@ -64,5 +87,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+  .answer {
+    width: 100%;
+    height: 50px;
+    background: #333652;
+    border: 2px solid $roxo;
+    border-radius: 5px;
+    font-family: $fonte;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFFFFF;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+  }
 </style>

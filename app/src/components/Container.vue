@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-genius">
     <slot></slot>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
 <style scoped lang="stylus">
   @import '../assets/stylus/variables.styl';
 
-  .container {
+  .container-genius {
     width: 100%;
     max-width: 100%;
     padding: 48px 108px;

@@ -39,9 +39,10 @@ export default {
 		div {
       height: 100%;
 			a {
-				width: 100px;
+				min-width: 100px;
 				height: 100%;
         display: flex;
+        padding: 26px;
         justify-content: center;
         align-items: center;
         color: $brancoFonte;
