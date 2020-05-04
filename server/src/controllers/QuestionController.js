@@ -92,6 +92,13 @@ module.exports = {
             return response.status(400).send(err.message)
         }
     },
+    async show(request, response) {
+        const { id } = request.params;
+
+        const question = await Question.findById(id);
+
+        return response.json(question);
+    },
     async destroy(request, response) {
         const { id } = request.params;
         
