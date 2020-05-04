@@ -70,7 +70,6 @@ export default {
 		},
 		async sendQuestion() {
 			const response = await this.$http.post(`${this.apiUrl}/questions/ask`, this.questionDto);
-			this.findKeywords();
 			if (response.data.message) {
 				this.answer = 'Nenhuma resposta encontrada, colocamos ela nas Perguntas não respondidas.';
 				return;
