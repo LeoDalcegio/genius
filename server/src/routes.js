@@ -32,6 +32,6 @@ routes.get('/notAnsweredQuestions/',celebrate({[Segments.QUERY]: Joi.object({
 );
 routes.delete('/notAnsweredQuestions/:id', NotAnsweredQuestionController.destroy);
 
-routes.get('/keywords/', KeywordController.getKeywords);
+routes.get('/keywords/:text', KeywordController.getKeywords);
 
 module.exports = routes;
