@@ -16,15 +16,12 @@ routes.post('/questions/ask', celebrate({[Segments.BODY]: Joi.object({
     }),}), 
     QuestionController.ask
 );
-
 routes.get('/questions', celebrate({[Segments.QUERY]: Joi.object({
     product: Joi.string()
     }),}), 
     QuestionController.index
 );
-
 routes.get('/questions/:id', QuestionController.show);
-
 routes.put('/questions/:id', QuestionController.update);
 routes.delete('/questions/:id', QuestionController.destroy);
 
@@ -33,8 +30,8 @@ routes.get('/notAnsweredQuestions/',celebrate({[Segments.QUERY]: Joi.object({
     }),}),  
     NotAnsweredQuestionController.index
 );
-
 routes.delete('/notAnsweredQuestions/:id', NotAnsweredQuestionController.destroy);
 
+routes.get('/keywords/', KeywordController.getKeywords);
 
 module.exports = routes;
