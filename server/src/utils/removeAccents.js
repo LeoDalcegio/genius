@@ -1,7 +1,9 @@
 "use strict"
 
 function removeAccents(text) {
-    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    const teste = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+
+    return teste
 }
 
 module.exports = removeAccents;

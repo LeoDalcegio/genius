@@ -48,7 +48,7 @@ module.exports = {
 
         if(productQuestions){
             productQuestions.questions.forEach((item) => {        
-                if(item.keywords.some(keyword => extractionResult.indexOf(removeAccents(keyword)) >= 0)){
+                if(item.keywords.some(keyword => extractionResult.indexOf(removeAccents(keyword).toLowerCase()) >= 0)){
                     matches.push(item.answers[item.standardAnswer]);
                 }
             });
