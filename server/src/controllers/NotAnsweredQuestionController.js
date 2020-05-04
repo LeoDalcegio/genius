@@ -4,8 +4,6 @@ const NotAnsweredQuestion = require('../models/NotAnsweredQuestions.js');
 
 module.exports = {
     async index(request, response){
-        const { page = 1, limit = 10 } = request.query;
-
         let query = {};
 
         if(request.query.product){
@@ -13,10 +11,7 @@ module.exports = {
         }
         
         try{
-            const notAnsweredQuestion = await NotAnsweredQuestion.paginate(query, { 
-                page, 
-                limit
-            });
+            const notAnsweredQuestion = await NotAnsweredQuestion.find(query);
             
             return response.json(notAnsweredQuestion);
         }catch(err){

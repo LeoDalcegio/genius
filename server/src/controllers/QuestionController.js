@@ -17,24 +17,18 @@ module.exports = {
                 }
             });
 
-            Question.findOneAndUpdate({ 
-                product: product 
-            }, { 
-                $set: { 
-                    product: product, 
-                    questions: questions
-                }
-            }, { 
-                upsert: true, 
-                new: true 
-            }, (err, data) => {
-                if (err) {
-                    return response.status(400).send({ error: "Error on creating question: " + err });
-                }
+            const existentQuestion = await Question.findOne({ product });
 
-                return response.json(data);
+            if(existentQuestion){
+                return response.send({ error: "There are already questions for this product."})
+            }
+
+            const createdQuestions = await Question.create({ 
+                product: product, 
+                questions: questions
             });
 
+            return response.json(createdQuestions);
         }catch(err){
             return response.status(400).send(err.message);
         }
@@ -73,8 +67,6 @@ module.exports = {
         return response.send({ answer: matches[0] });
     },
     async index(request, response){
-        const { page = 1, limit = 10 } = request.query;
-
         let query = {};
 
         if(request.query.product){
@@ -82,10 +74,7 @@ module.exports = {
         }
 
         try{
-            const questions = await Question.paginate(query, { 
-                page, 
-                limit
-            });
+            const questions = await Question.find(query);
         
             return response.json(questions);
         }catch(err){
