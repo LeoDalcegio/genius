@@ -15,6 +15,7 @@ library.add(faFilter, faTrash, faEdit, faCheck, faTimes);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;

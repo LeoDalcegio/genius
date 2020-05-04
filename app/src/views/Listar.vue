@@ -25,13 +25,14 @@
       </thead>
       <tbody>
         <tr v-for="product in products" :key="product.id">
-          <td class="pl-37">{{ product.name }}</td>
-          <td>{{ product.quantity }}</td>
+          <td class="pl-37">{{ product.product }}</td>
+          <td>{{ product.questions.length }}</td>
           <td>
-            <a href="javascript:;" class="btn-table btn-edit mr-25">
+            <a href="javascript:;" class="btn-table btn-edit mr-25"
+            @click="editProduct(product._id)">
               <font-awesome-icon icon="edit" />
             </a>
-            <a href="javascript:;" class="btn-table btn-delete">
+            <a href="javascript:;" class="btn-table btn-delete" @click="deleteProduct(product._id)">
               <font-awesome-icon icon="trash" />
             </a>
           </td>
@@ -55,40 +56,27 @@ export default {
 	data() {
 		return {
 			products: [],
-			apiUrl: process.env.VUE_API_URL,
+			apiUrl: process.env.VUE_APP_API_URL,
 			pesquisa: '',
 		};
 	},
 	methods: {
 		fetchProducts() {
-			// this.$http.get(this.apiUrl).then((response) => {
-			//	console.log(response);
-			// });
-			this.products = [
-				{
-					id: 1,
-					name: 'Bicicleta',
-					quantity: 2,
-				},
-				{
-					id: 2,
-					name: 'Capacete',
-					quantity: 15,
-				},
-				{
-					id: 2,
-					name: 'Capacete',
-					quantity: 15,
-				},
-				{
-					id: 2,
-					name: 'Capacete',
-					quantity: 15,
-				},
-			];
+			this.$http.get(`${this.apiUrl}/questions`).then((response) => {
+				this.products = response.data.docs;
+			});
 		},
 		redirectToCriar() {
 			this.$router.push('criar');
+		},
+		editProduct(id) {
+			console.log(id);
+			this.$router.push({ path: `editar/${id}` });
+		},
+		deleteProduct(id) {
+			this.$http.delete(`${this.apiUrl}/questions/${id}`).then((response) => {
+				console.log(response);
+			});
 		},
 	},
 	beforeMount() {

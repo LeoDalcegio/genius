@@ -17,7 +17,7 @@
 
       <div class="flexed-column w100p">
         <label>Nome do produto<small>*</small></label>
-        <input type="text" v-model="productDto.product.name" placeholder="Ex: Boné">
+        <input type="text" v-model="productDto.product" placeholder="Ex: Boné">
       </div>
 
       <div class="flexed mt-35">
@@ -27,24 +27,24 @@
           <div class="left-column column flexed-column">
             <div class="flexed-column w100p">
               <label>Pergunta<small>*</small></label>
-              <input type="text" v-model="question.name"
+              <input type="text" v-model="question.question"
                   placeholder="Ex: Você tem o produto no estoque ?">
             </div>
             <div class="flexed-column mt-26">
               <label>Respostas<small>*</small></label>
               <div class="flexed-column mb-18">
                 <label class="not-big">Positiva</label>
-                <input type="text" v-model="question.positive"
+                <input type="text" v-model="question.answers.positive"
                     placeholder="Ex: Sim, nós temos o produto em estoque...">
               </div>
               <div class="flexed-column mb-18">
                 <label class="not-big">Negativa</label>
-                <input type="text" v-model="question.negative"
+                <input type="text" v-model="question.answers.negative"
                     placeholder="Ex: Não, estamos fabricando mais...">
               </div>
               <div class="flexed-column">
                 <label class="not-big">Informativa</label>
-                <input type="text" v-model="question.informative"
+                <input type="text" v-model="question.answers.informative"
                     placeholder="Ex: Por enquanto não, mas ele chegará no próximo mês">
               </div>
             </div>
@@ -72,17 +72,17 @@
               <label>Resposta Padrão<small>*</small></label>
               <div class="flexed mt-20">
                 <label class="custom-radio radio mr-42">Positiva
-                  <input type="radio" value="positive" v-model="question.default"
+                  <input type="radio" value="positive" v-model="question.standardAnswer"
                       name="radio">
                   <span class="checkmark"></span>
                 </label>
                 <label class="custom-radio radio mr-42">Negativa
-                  <input type="radio" value="negative" v-model="question.default"
+                  <input type="radio" value="negative" v-model="question.standardAnswer"
                       name="radio">
                   <span class="checkmark"></span>
                 </label>
                 <label class="custom-radio radio">Informativa
-                  <input type="radio" value="informative" v-model="question.default"
+                  <input type="radio" value="informative" v-model="question.standardAnswer"
                       name="radio">
                   <span class="checkmark"></span>
                 </label>
@@ -135,6 +135,7 @@ export default {
 				questions: [],
 			},
 			question: {
+				answers: {},
 				keywords: [],
 			},
 			keyword: '',
@@ -154,7 +155,7 @@ export default {
 			this.$router.push('/');
 		},
 		saveProductWithQuestion() {
-			this.$http.post(this.apiUrl, this.productDto).then((response) => {
+			this.$http.post(`${this.apiUrl}/questions/create`, this.productDto).then((response) => {
 				console.log(response);
 			});
 		},
@@ -176,11 +177,11 @@ export default {
 		addQuestion() {
 			if (this.question.index || this.question.index === 0) {
 				this.editAddedQuestion();
-				console.log('if');
 				return;
 			}
 			this.productDto.questions.push(this.question);
 			this.question = {
+				answers: {},
 				keywords: [],
 			};
 		},
@@ -197,6 +198,7 @@ export default {
 			this.productDto.questions[this.question.index] = this.question;
 			delete this.question.index;
 			this.question = {
+				answers: {},
 				keywords: [],
 			};
 		},
