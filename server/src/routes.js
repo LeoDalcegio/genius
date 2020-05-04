@@ -4,6 +4,7 @@ const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 const QuestionController = require('./controllers/QuestionController')
 const NotAnsweredQuestionController = require('./controllers/NotAnsweredQuestionController')
+const KeywordController = require('./controllers/KeywordController')
 
 const routes = express.Router();
 
