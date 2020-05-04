@@ -23,6 +23,8 @@ routes.get('/questions', celebrate({[Segments.QUERY]: Joi.object({
     QuestionController.index
 );
 
+routes.get('/questions/:id', QuestionController.show);
+
 routes.put('/questions/:id', QuestionController.update);
 routes.delete('/questions/:id', QuestionController.destroy);
 
