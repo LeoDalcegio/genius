@@ -70,8 +70,7 @@ export default {
 			this.$router.push('criar');
 		},
 		editProduct(id) {
-			console.log(id);
-			this.$router.push({ path: `editar/${id}` });
+			this.$router.push({ name: 'Editar', params: { id } });
 		},
 		deleteProduct(id) {
 			this.$http.delete(`${this.apiUrl}/questions/${id}`).then((response) => {

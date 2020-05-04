@@ -7,8 +7,11 @@
         <button class="white mr-25" @click="redirectToListar()">
           Voltar
         </button>
-        <button class="yellow" @click="saveProductWithQuestion()">
+        <button class="yellow" @click="saveProductWithQuestion()" v-if="!productDto._id">
           Criar
+        </button>
+        <button class="yellow" @click="editProductWithQuestion()" v-if="productDto._id">
+          Editar
         </button>
       </div>
     </div>
@@ -101,7 +104,7 @@
       <div class="flexed-column suround-questions mt-18" v-if="productDto.questions.length > 0">
         <div class="flexed space-between question" :class="index%2 === 1 ? 'boder-top' : ''"
             v-for="(question, index) in productDto.questions" :key="index">
-          <label class="not-big">{{ question.name }}</label>
+          <label class="not-big">{{ question.question }}</label>
           <div class="flexed">
             <a href="javascript:;" class="btn-edit mr-14" @click="editQuestion(index)">
               <font-awesome-icon icon="edit" />
@@ -131,7 +134,6 @@ export default {
 	data() {
 		return {
 			productDto: {
-				product: {},
 				questions: [],
 			},
 			question: {
@@ -140,14 +142,15 @@ export default {
 			},
 			keyword: '',
 			keywordExist: false,
-			apiUrl: process.env.VUE_API_URL,
+			apiUrl: process.env.VUE_APP_API_URL,
 		};
 	},
 	methods: {
 		findProductBydId() {
-			if (this.$router.params) {
-				this.$http.get(`${this.apiUrl}/${this.$router.params.id}`).then((response) => {
-					console.log(response);
+			if (this.$route.params) {
+				console.log('aa');
+				this.$http.get(`${this.apiUrl}/questions/${this.$route.params.id}`).then((response) => {
+					this.productDto = response.data;
 				});
 			}
 		},
@@ -155,8 +158,14 @@ export default {
 			this.$router.push('/');
 		},
 		saveProductWithQuestion() {
-			this.$http.post(`${this.apiUrl}/questions/create`, this.productDto).then((response) => {
-				console.log(response);
+			this.$http.post(`${this.apiUrl}/questions/create`, this.productDto).then(() => {
+				this.$router.push('/');
+			});
+		},
+		editProductWithQuestion() {
+			// eslint-disable-next-line no-underscore-dangle
+			this.$http.put(`${this.apiUrl}/questions/${this.productDto._id}`, this.productDto).then(() => {
+				this.$router.push('/');
 			});
 		},
 		addKeyword() {

@@ -7,10 +7,10 @@
 
   <div class="flexed-column w100p mb-24">
     <label>Escolha o produto</label>
-    <select v-model="questionDto.productName">
+    <select v-model="questionDto.product">
       <option value="" selected disabled>Selecione o produto</option>
       <option v-for="(product, index) in products" :key="index"
-          v-bind:value="product.name">{{ product.name }}</option>
+          v-bind:value="product.product">{{ product.product }}</option>
     </select>
   </div>
 
@@ -47,26 +47,14 @@ export default {
 	},
 	methods: {
 		findAllProducts() {
-			// this.$http.get(this.apiUrl).then((response) => {
-			//  console.log(response);
-			// });
-			this.products = [
-				{
-					id: 1,
-					name: 'Bike',
-				},
-				{
-					id: 3,
-					name: 'Bike top',
-				},
-				{
-					id: 1,
-					name: 'Bike boa',
-				},
-			];
+			this.$http.get(`${this.apiUrl}/questions`).then((response) => {
+				this.products = response.data.docs;
+			});
 		},
 		sendQuestion() {
-			console.log(this.questionDto);
+			this.$http.post(`${this.apiUrl}/questions/ask`, this.questionDto).then((response) => {
+				console.log(response);
+			});
 		},
 	},
 	beforeMount() {
