@@ -88,10 +88,9 @@ export default {
 		};
 	},
 	methods: {
-		fetchProducts() {
-			this.$http.get(`${this.apiUrl}/questions`).then((response) => {
-				this.products = response.data.docs;
-			});
+		async fetchProducts() {
+			const response = await this.$http.get(`${this.apiUrl}/questions`);
+			this.products = response.data;
 		},
 		redirectToCriar() {
 			this.$router.push('criar');
@@ -106,6 +105,7 @@ export default {
 			this.$http.delete(`${this.apiUrl}/questions/${this.idDeleteProduct}`).then(() => {
 				this.fetchProducts();
 				this.idDeleteProduct = '';
+				this.$refs['delete-modal'].hide();
 			});
 		},
 		openDeleteModal(id) {
@@ -123,7 +123,7 @@ export default {
 				return;
 			}
 			this.$http.get(`${this.apiUrl}/questions?product=${this.search}`).then((response) => {
-				this.products = response.data.docs;
+				this.products = response.data;
 			});
 		}, 500),
 	},

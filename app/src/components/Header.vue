@@ -51,6 +51,7 @@ export default {
         font-weight: 500;
         font-size: 18px;
         line-height: 21px;
+        transition: 0.1s all ease;
         &.ativo,
         &:hover {
           background: $amareloHover

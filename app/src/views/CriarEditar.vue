@@ -146,12 +146,11 @@ export default {
 		};
 	},
 	methods: {
-		findProductBydId() {
+		async findProductBydId() {
 			if (this.$route.params) {
-				console.log('aa');
-				this.$http.get(`${this.apiUrl}/questions/${this.$route.params.id}`).then((response) => {
-					this.productDto = response.data;
-				});
+				const response = await this.$http.get(`${this.apiUrl}/questions/${this.$route.params.id}`);
+				this.productDto = response.data;
+				this.editQuestion(0);
 			}
 		},
 		redirectToListar() {
@@ -203,7 +202,6 @@ export default {
 			this.productDto.questions.splice(index, 1);
 		},
 		editAddedQuestion() {
-			console.log('added');
 			this.productDto.questions[this.question.index] = this.question;
 			delete this.question.index;
 			this.question = {
