@@ -30,7 +30,7 @@
           <div class="left-column column flexed-column">
             <div class="flexed-column w100p">
               <label>Pergunta<small>*</small></label>
-              <input type="text" v-model="question.question"
+              <input type="text" v-model="question.question" @blur="findKeywords()"
                   placeholder="Ex: Você tem o produto no estoque ?">
             </div>
             <div class="flexed-column mt-26">
@@ -208,6 +208,10 @@ export default {
 				answers: {},
 				keywords: [],
 			};
+		},
+		async findKeywords() {
+			const response = await this.$http.get(`${this.apiUrl}/keywords/${this.question.question}`);
+			this.question.keywords = response.data.keywords;
 		},
 	},
 	beforeMount() {

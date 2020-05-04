@@ -32,13 +32,6 @@
     </div>
   </div>
 
-  <div class="w100p flexed-column mt-38">
-    <label>Palavras-chaves</label>
-    <div class="answer">
-      {{ showKeywords() }}
-    </div>
-  </div>
-
   </Container>
 </template>
 
@@ -58,7 +51,6 @@ export default {
 			questionDto: {},
 			products: [],
 			answer: '',
-			keywords: [],
 		};
 	},
 	watch: {
@@ -84,10 +76,6 @@ export default {
 				return;
 			}
 			this.answer = response.data.answer;
-		},
-		async findKeywords() {
-			const response = await this.$http.get(`${this.apiUrl}/keywords/${this.questionDto.question}`);
-			this.keywords = response.data.keywords;
 		},
 		showKeywords() {
 			let text = '';
