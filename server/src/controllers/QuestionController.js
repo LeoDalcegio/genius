@@ -64,7 +64,9 @@ module.exports = {
             return response.status(200).send({ message: "This product does not have any questions/anwsers to it, but we added this question to the NotAnsweredQuestion document." });
         };
 
-        return response.send({ answer: matches[0] });
+        const answer = matches.join('. '); 
+
+        return response.send({ answer });
     },
     async index(request, response){
         let query = {};
